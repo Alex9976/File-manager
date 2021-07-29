@@ -34,12 +34,12 @@ BOOL WorkWindow::Initialize(HINSTANCE hInstance)
 	return TRUE;
 }
 
-WPARAM WorkWindow::MessageLoop()
+WPARAM WorkWindow::MessageLoop(HACCEL hAccel)
 {
 	MSG msg;
-	BOOL bRet = 0;
-	while (bRet = GetMessage(&msg, hWnd, 0, 0) > 0)
+	while (GetMessage(&msg, hWnd, 0, 0) > 0)
 	{
+		TranslateAccelerator(hWnd, hAccel, &msg);
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}

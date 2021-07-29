@@ -12,5 +12,5 @@ protected:
 public:
 	WorkWindow() : hWnd(NULL) {}
 	BOOL Initialize(HINSTANCE hInstance);
-	WPARAM MessageLoop();
+	WPARAM MessageLoop(HACCEL hAccel);
 };

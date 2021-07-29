@@ -146,7 +146,11 @@
   <ItemGroup>
     <ClInclude Include="MainWindow.hpp" />
     <ClInclude Include="Procedures.hpp" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="WorkWindow.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="File-manager.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
