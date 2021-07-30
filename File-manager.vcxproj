@@ -114,7 +114,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -139,20 +139,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Convert.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Procedures.cpp" />
+    <ClCompile Include="VolumeInfo.cpp" />
     <ClCompile Include="WorkPane.cpp" />
     <ClCompile Include="WorkWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Constants.hpp" />
+    <ClInclude Include="Convert.hpp" />
     <ClInclude Include="MainWindow.hpp" />
     <ClInclude Include="Procedures.hpp" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="VolumeInfo.hpp" />
     <ClInclude Include="WorkPane.hpp" />
     <ClInclude Include="WorkWindow.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="File-manager.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Bitmap\Audio_File.bmp" />
+    <Image Include="Bitmap\Document.bmp" />
+    <Image Include="Bitmap\Exe.bmp" />
+    <Image Include="Bitmap\File.bmp" />
+    <Image Include="Bitmap\Folder-Open.bmp" />
+    <Image Include="Bitmap\Folder.bmp" />
+    <Image Include="Bitmap\Image_File.bmp" />
+    <Image Include="Bitmap\Video_File.bmp" />
+    <Image Include="Icons\HDD.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

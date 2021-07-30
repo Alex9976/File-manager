@@ -2,11 +2,18 @@
 // Включаемый файл, созданный в Microsoft Visual C++.
 // Используется File-manager.rc
 //
+#define IDI_LOGO                        101
+#define IDB_FOLDER                      106
+#define IDB_FILE                        107
+#define IDB_FOLDER_OPEN                 108
+#define IDB_EXE                         109
+#define IDB_AUDIO                       110
+#define IDB_DOCUMENT                    111
+#define IDB_IMAGE                       112
+#define IDB_VIDEO                       113
 #define IDR_MENU                        114
 #define IDD_FILE_NEW_DIALOG             117
-#define IDD_ABOUT_DIALOG                119
 #define IDD_DIALOG1                     121
-#define IDD_END_DIALOG                  121
 #define IDR_ACCELERATOR1                125
 #define IDC_EDIT1                       1001
 #define IDC_ABOUT_STATIC                1003

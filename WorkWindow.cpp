@@ -16,7 +16,7 @@ BOOL WorkWindow::Initialize(HINSTANCE hInstance)
 	wndClass.lpszClassName = className;
 	wndClass.hInstance = hInstance;
 	wndClass.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	wndClass.hIcon = LoadIcon(hInstance, IDI_APPLICATION);
+	wndClass.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_LOGO));
 	wndClass.lpszMenuName = MAKEINTRESOURCE(IDR_MENU);
 	wndClass.style = CS_DBLCLKS;
 

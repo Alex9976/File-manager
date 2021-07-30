@@ -1,6 +1,11 @@
 #include "WorkPane.hpp"
 #include <CommCtrl.h>
 #include <windowsx.h>
+#include "Convert.hpp"
+#include "resource.h"
+#include <tchar.h>
+#include <Shlwapi.h>
+#include "Constants.hpp"
 
 BOOL WorkPane::Initialize(HWND hWnd, UINT uComboId, UINT uListId, UINT uTextId, BOOL isLeft)
 {
@@ -51,6 +56,8 @@ BOOL WorkPane::CreateListView(HWND hWnd, UINT uId)
 
 void WorkPane::ListViewInitialize()
 {
+	CreateIconList();
+
 	LVCOLUMN lvc;
 	lvc.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
 
@@ -70,6 +77,9 @@ void WorkPane::ListViewInitialize()
 	lvc.pszText = (LPWSTR)L"Date";
 	lvc.iSubItem = 2;
 	ListView_InsertColumn(hListView, 2, &lvc);
+
+	UpdateList(volumeInfo.path);
+	SetCurrentPath(volumeInfo.path);
 }
 
 void WorkPane::Resize(HWND hWnd, LPARAM lParam)
@@ -103,10 +113,25 @@ BOOL WorkPane::CreateComboBox(HWND hWnd, UINT uId)
 
 void WorkPane::ComboBoxInit()
 {
+	TCHAR drives[10][4];
+	UINT uNumber = volumeInfo.GetNumberOfVolumes(drives);
+
+	TCHAR A[40];
+	memset(&A, 0, sizeof(A));
+
+	for (size_t k = 0; k <= uNumber - 1; k++)
+	{
+		wcscpy_s(A, sizeof(A) / sizeof(TCHAR), (TCHAR*)drives[k]);
+		SendMessage(hComboBox, (UINT)CB_ADDSTRING, (WPARAM)0, (LPARAM)A);
+	}
+
 	SendMessage(hComboBox, CB_SETCURSEL, (WPARAM)0, (LPARAM)0);
 	size_t length = ComboBox_GetTextLength(hComboBox);
 	auto string = (LPWSTR)GlobalAlloc(GPTR, length + 1);
 	ComboBox_GetText(hComboBox, string, length + 1);
+
+	SetCurrentPath(string);
+	volumeInfo.Update(string);
 }
 
 BOOL WorkPane::CreatePathLabel(HWND hWnd, UINT uId)
@@ -117,4 +142,155 @@ BOOL WorkPane::CreatePathLabel(HWND hWnd, UINT uId)
 	if (hLabel == nullptr)
 		return FALSE;
 	else return TRUE;
+}
+
+void WorkPane::SetCurrentPath(TCHAR* path)
+{
+	lstrcpyn(currentPath, path, 256);
+}
+
+LPWSTR WorkPane::GetCurrentPath()
+{
+	return currentPath;
+}
+
+WorkPane::WorkPane()
+{
+	memset(currentPath, '\0', 256);
+}
+
+void WorkPane::UpdateList(TCHAR* _path)
+{
+	auto* oldPath = new TCHAR[256];
+	memset(oldPath, '\0', 256);
+	wcscpy(oldPath, currentPath);
+
+	ListView_DeleteAllItems(hListView);
+
+	int length = lstrlen(_path) + lstrlen(TEXT("*.*"));
+	auto* path = new TCHAR[length];
+	wcscpy(path, _path);
+	Edit_SetText(hLabel, path);
+	SetCurrentPath(path);
+	wcscat(path, TEXT("*.*"));
+
+
+	WIN32_FIND_DATA data;
+	HANDLE hFile = FindFirstFile(path, &data);
+
+	SendMessage(hListView, LB_RESETCONTENT, 0, 0);
+
+	int i = 0;
+	while (FindNextFile(hFile, &data))
+	{
+		InsertItem(i, data, hFile);
+		i++;
+	}
+
+	if (i == 0 && (MessageBox(nullptr, TEXT("Access denied"), TEXT("Error"), MB_OK | MB_ICONERROR) == IDOK))
+	{
+		UpdateList(oldPath);
+	}
+
+	FindClose(hFile);
+}
+
+void WorkPane::InsertItem(UINT uItem, WIN32_FIND_DATA data, HANDLE hFile)
+{
+	LVITEM lvi;
+	lvi.mask = LVIF_TEXT | LVIF_IMAGE;
+
+	// Name column
+	lvi.pszText = data.cFileName;
+	lvi.iItem = uItem;
+	lvi.iSubItem = 0;
+	lvi.iImage = GetIconIndex(data);
+	ListView_InsertItem(hListView, &lvi);
+
+	if (lvi.iImage == 1 || lvi.iImage == 2)
+		lvi.pszText = (LPWSTR)L"Folder";
+	else
+	{
+		LPWSTR s1 = GetLPWSTR(data.nFileSizeHigh * (MAXDWORD + 1) + data.nFileSizeLow), s2 = (LPWSTR)L" bytes";
+		int lenght = lstrlen(s1) + lstrlen(s2);
+		auto* tmp = new TCHAR[lenght];
+		wcscpy(tmp, s1);
+		wcscat(tmp, s2);
+
+		lvi.pszText = tmp;
+	}
+	lvi.iSubItem = 1;
+	ListView_SetItem(hListView, &lvi);
+
+	lvi.pszText = GetLPWSTR(data.ftLastWriteTime);
+	lvi.iSubItem = 2;
+	ListView_SetItem(hListView, &lvi);
+}
+
+void WorkPane::CreateIconList()
+{
+	HIMAGELIST hImageList = ImageList_Create(16, 16, ILC_COLOR32, 8, 0);
+	HBITMAP hBmp = nullptr;
+
+	hBmp = LoadBitmap(GetModuleHandle(nullptr), MAKEINTRESOURCE(IDB_FILE));
+	ImageList_Add(hImageList, hBmp, (HBITMAP)nullptr);
+	DeleteObject(hBmp);
+
+	hBmp = LoadBitmap(GetModuleHandle(nullptr), MAKEINTRESOURCE(IDB_FOLDER));
+	ImageList_Add(hImageList, hBmp, (HBITMAP)nullptr);
+	DeleteObject(hBmp);
+
+	hBmp = LoadBitmap(GetModuleHandle(nullptr), MAKEINTRESOURCE(IDB_FOLDER_OPEN));
+	ImageList_Add(hImageList, hBmp, (HBITMAP)nullptr);
+	DeleteObject(hBmp);
+
+	hBmp = LoadBitmap(GetModuleHandle(nullptr), MAKEINTRESOURCE(IDB_EXE));
+	ImageList_Add(hImageList, hBmp, (HBITMAP)nullptr);
+	DeleteObject(hBmp);
+
+	hBmp = LoadBitmap(GetModuleHandle(nullptr), MAKEINTRESOURCE(IDB_AUDIO));
+	ImageList_Add(hImageList, hBmp, (HBITMAP)nullptr);
+	DeleteObject(hBmp);
+
+	hBmp = LoadBitmap(GetModuleHandle(nullptr), MAKEINTRESOURCE(IDB_VIDEO));
+	ImageList_Add(hImageList, hBmp, (HBITMAP)nullptr);
+	DeleteObject(hBmp);
+
+	hBmp = LoadBitmap(GetModuleHandle(nullptr), MAKEINTRESOURCE(IDB_IMAGE));
+	ImageList_Add(hImageList, hBmp, (HBITMAP)nullptr);
+	DeleteObject(hBmp);
+
+	hBmp = LoadBitmap(GetModuleHandle(nullptr), MAKEINTRESOURCE(IDB_DOCUMENT));
+	ImageList_Add(hImageList, hBmp, (HBITMAP)nullptr);
+	DeleteObject(hBmp);
+
+	ListView_SetImageList(hListView, hImageList, LVSIL_SMALL);
+}
+
+int WorkPane::GetIconIndex(WIN32_FIND_DATA data)
+{
+	LPWSTR lpsPath = ConnectTwoString(this->currentPath, (LPWSTR)data.cFileName, TRUE);
+	LPWSTR lpsExt = PathFindExtension(lpsPath);
+
+	if ((!_tcscmp(lpsExt, TEXT("")) || !_tcscmp(data.cFileName, TEXT(".."))) && data.nFileSizeLow == 0)
+	{
+		return !_tcscmp(data.cFileName, TEXT("..")) ? 2 : 1;
+	}
+	else
+	{
+		for (int i = 0; i < MAX_COUNT_FORMATS; i++)
+		{
+			if (!_tcscmp(lpsExt, exeFormat[i]))
+				return 3;
+			if (!_tcscmp(lpsExt, audioFormat[i])) 
+				return 4;
+			if (!_tcscmp(lpsExt, videoFormat[i])) 
+				return 5;
+			if (!_tcscmp(lpsExt, imageFormat[i])) 
+				return 6;
+			if (!_tcscmp(lpsExt, documentFormat[i])) 
+				return 7;
+		}
+	}
+	return 0;
 }

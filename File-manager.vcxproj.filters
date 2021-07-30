@@ -27,6 +27,12 @@
     <ClCompile Include="WorkPane.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="VolumeInfo.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Convert.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWindow.hpp">
@@ -44,10 +50,48 @@
     <ClInclude Include="WorkPane.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="VolumeInfo.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Convert.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="File-manager.rc">
       <Filter>Файлы ресурсов</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Icons\HDD.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Bitmap\Folder.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Bitmap\File.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Bitmap\Folder-Open.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Bitmap\Exe.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Bitmap\Audio_File.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Bitmap\Document.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Bitmap\Image_File.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Bitmap\Video_File.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
 </Project>
