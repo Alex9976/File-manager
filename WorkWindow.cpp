@@ -1,7 +1,7 @@
 #include "WorkWindow.hpp"
 #include "MainWindow.hpp"
 #include "Procedures.hpp"
-
+#include "resource.h"
 
 
 BOOL WorkWindow::Initialize(HINSTANCE hInstance)
@@ -17,7 +17,7 @@ BOOL WorkWindow::Initialize(HINSTANCE hInstance)
 	wndClass.hInstance = hInstance;
 	wndClass.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	wndClass.hIcon = LoadIcon(hInstance, IDI_APPLICATION);
-	wndClass.lpszMenuName = NULL;
+	wndClass.lpszMenuName = MAKEINTRESOURCE(IDR_MENU);
 	wndClass.style = CS_DBLCLKS;
 
 	if (RegisterClassEx(&wndClass) == NULL) return FALSE;

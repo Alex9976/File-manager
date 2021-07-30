@@ -47,19 +47,144 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// Menu
+//
+
+IDR_MENU MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "New\tCtrl+N",                 ID_FILE_NEW
+        MENUITEM "Open\tCtrl+O",                ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "Exit\tAlt+F4",                ID_FILE_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "Cut\tCtrl+X",                 ID_EDIT_CUT
+        MENUITEM "Copy\tCtrl+C",                ID_EDIT_COPY
+        MENUITEM "Paste\tCtrl+V",               ID_EDIT_PASTE
+        MENUITEM "Delete\tDel",                 ID_EDIT_DELETE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "About \tCtrl+I",              ID_HELP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_FILE_NEW_DIALOG DIALOGEX 0, 0, 327, 28
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,212,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,270,7,50,14
+    EDITTEXT        IDC_EDIT1,7,7,192,14,ES_AUTOHSCROLL
+END
+
+IDD_ABOUT_DIALOG DIALOGEX 0, 0, 221, 74
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,164,53,50,14
+    LTEXT           "Copyright 2016 by Lukasz Zapala",IDC_STATIC,54,32,109,8
+END
+
+IDD_END_DIALOG DIALOGEX 0, 0, 199, 73
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Question"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,82,52,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,142,52,50,14
+    CTEXT           "Do you want close this window?",IDC_STATIC,26,23,146,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_FILE_NEW_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 320
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 21
+    END
+
+    IDD_ABOUT_DIALOG, DIALOG
+    BEGIN
+        MOCKUP, 0, 21, 50, 50, ".\Bitmap\Audio_File.bmp"
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 214
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 67
+    END
+
+    IDD_END_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 192
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 66
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_FILE_NEW_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_ABOUT_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_END_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 100
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // Accelerator
 //
 
 IDR_ACCELERATOR1 ACCELERATORS
 BEGIN
-    VK_DELETE,      ID_DEL,                 VIRTKEY, NOINVERT
-    "C",            ID_COPY,                ASCII,  NOINVERT
-    "X",            ID_CUT,                 ASCII,  NOINVERT
-    "I",            ID_INFO,                ASCII,  NOINVERT
-    "V",            ID_PASTE,               ASCII,  NOINVERT
+    VK_DELETE,      ID_DEL,     	        VIRTKEY, NOINVERT
+    "C",            ID_COPY,                VIRTKEY, CONTROL, NOINVERT
+    "X",            ID_CUT,                 VIRTKEY, CONTROL, NOINVERT
+    "I",            ID_INFO,                VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_PASTE,               VIRTKEY, CONTROL, NOINVERT
+	"N",            ID_NEW,                 VIRTKEY, CONTROL, NOINVERT
+	"O",            ID_OPEN,                VIRTKEY, CONTROL, NOINVERT
 END
 
-#endif    // Русский (Россия) resources
+#endif    // Polish (Poland) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
