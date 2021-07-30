@@ -141,12 +141,14 @@
   <ItemGroup>
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Procedures.cpp" />
+    <ClCompile Include="WorkPane.cpp" />
     <ClCompile Include="WorkWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWindow.hpp" />
     <ClInclude Include="Procedures.hpp" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="WorkPane.hpp" />
     <ClInclude Include="WorkWindow.hpp" />
   </ItemGroup>
   <ItemGroup>

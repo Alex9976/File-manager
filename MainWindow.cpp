@@ -7,7 +7,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	WorkWindow wWindow;
 	if (!wWindow.Initialize(hInstance))
 	{
-		MessageBox(nullptr, TEXT("Initialization failure"), TEXT("Error"), MB_OK | MB_ICONERROR);
+		MessageBox(nullptr, TEXT("MainWindow initialization failure"), TEXT("Error"), MB_OK | MB_ICONERROR);
 	}
 
 	HACCEL hAccel = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDR_ACCELERATOR1));

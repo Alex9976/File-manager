@@ -10,7 +10,6 @@ protected:
 	HWND hWnd;
 	SIZE sWindowSize;
 public:
-	WorkWindow() : hWnd(NULL) {}
 	BOOL Initialize(HINSTANCE hInstance);
 	WPARAM MessageLoop(HACCEL hAccel);
 };
