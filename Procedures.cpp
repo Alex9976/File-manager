@@ -52,6 +52,13 @@ LRESULT CommandProcedure(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (LOWORD(wParam))
 	{
+	case ID_EDIT_REFRESH:
+	case ID_REFRESH:
+		leftWorkPane.UpdateList(leftWorkPane.GetCurrentPath());
+		rightWorkPane.UpdateList(rightWorkPane.GetCurrentPath());
+		rightWorkPane.UpdateSizes();
+		leftWorkPane.UpdateSizes();
+		break;
 	case ID_LEFTCOMBOBOX:
 		leftWorkPane.isSelected = TRUE;
 		rightWorkPane.isSelected = FALSE;

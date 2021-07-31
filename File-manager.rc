@@ -61,12 +61,19 @@ IDI_LOGO                ICON                    "Icons\\logo.ico"
 //
 
 IDB_FOLDER              BITMAP                  "Icons\\folder.bmp"
+
 IDB_FILE                BITMAP                  "Icons\\file.bmp"
+
 IDB_FOLDER_OPEN         BITMAP                  "Icons\\folder-open.bmp"
+
 IDB_EXE                 BITMAP                  "Icons\\exe.bmp"
+
 IDB_AUDIO               BITMAP                  "Icons\\audio.bmp"
+
 IDB_DOCUMENT            BITMAP                  "Icons\\document.bmp"
+
 IDB_IMAGE               BITMAP                  "Icons\\image.bmp"
+
 IDB_VIDEO               BITMAP                  "Icons\\video.bmp"
 
 
@@ -90,6 +97,8 @@ BEGIN
         MENUITEM "Copy\tCtrl+C",                ID_EDIT_COPY
         MENUITEM "Paste\tCtrl+V",               ID_EDIT_PASTE
         MENUITEM "Delete\tDel",                 ID_EDIT_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "Refresh\tF5",                 ID_EDIT_REFRESH
     END
     POPUP "&Help"
     BEGIN
@@ -152,13 +161,14 @@ END
 
 IDR_ACCELERATOR1 ACCELERATORS
 BEGIN
-    VK_DELETE,      ID_DEL,                 VIRTKEY, NOINVERT
     "C",            ID_COPY,                VIRTKEY, CONTROL, NOINVERT
     "X",            ID_CUT,                 VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_DEL,                 VIRTKEY, NOINVERT
     "I",            ID_INFO,                VIRTKEY, CONTROL, NOINVERT
-    "V",            ID_PASTE,               VIRTKEY, CONTROL, NOINVERT
     "N",            ID_NEW,                 VIRTKEY, CONTROL, NOINVERT
     "O",            ID_OPEN,                VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_PASTE,               VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_REFRESH,             VIRTKEY, NOINVERT
 END
 
 #endif    // Русский (Россия) resources

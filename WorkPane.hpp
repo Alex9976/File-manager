@@ -19,7 +19,7 @@ private:
 	int GetIconIndex(WIN32_FIND_DATA data);
 	void InsertItem(UINT uItem, WIN32_FIND_DATA data, HANDLE hFile);
 public: 
-	HWND hListView, hLabel, hComboBox, hSizeLabel;
+	HWND hListView, hLabel, hComboBox, hSizeLabel, hRefreshButton;
 	BOOL isSelected;
 	BOOL Initialize(HWND hWnd, UINT uComboId, UINT uListId, UINT uTextId, BOOL isLeft);
 	void Resize(HWND hWnd, LPARAM lParam);

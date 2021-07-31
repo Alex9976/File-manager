@@ -30,8 +30,11 @@
 #define ID_EDIT_COPY                    40009
 #define ID_EDIT_PASTE                   40010
 #define ID_EDIT_DELETE                  40011
-#define ID_HELP_ABOUT			        40016
+#define ID_HELP_ABOUT                   40016
+#define ID_REFRESH                      40019
+#define ID_EDIT_                        40021
 #define ID_PASTE                        40022
+#define ID_EDIT_REFRESH                 40032
 #define ID_COPY                         40023
 #define ID_CUT                          40024
 #define ID_DEL                          40026
@@ -44,7 +47,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        104
-#define _APS_NEXT_COMMAND_VALUE         40019
+#define _APS_NEXT_COMMAND_VALUE         40023
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
