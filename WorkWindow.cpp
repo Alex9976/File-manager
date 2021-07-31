@@ -37,7 +37,8 @@ BOOL WorkWindow::Initialize(HINSTANCE hInstance)
 WPARAM WorkWindow::MessageLoop(HACCEL hAccel)
 {
 	MSG msg;
-	while (GetMessage(&msg, hWnd, 0, 0) > 0)
+	// changed from hWnd to NULL
+	while (GetMessage(&msg, NULL, 0, 0) > 0)
 	{
 		TranslateAccelerator(hWnd, hAccel, &msg);
 		TranslateMessage(&msg);
