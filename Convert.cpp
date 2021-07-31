@@ -39,22 +39,50 @@ LPWSTR GetLPWSTR(const FILETIME ft)
 	auto* year = new TCHAR[4];
 	wcscpy(year, GetLPWSTR(sTime.wYear));
 	auto* month = new TCHAR[2];
-	wcscpy(month, GetLPWSTR(sTime.wMonth));
+	if (sTime.wMonth < 10)
+	{
+		wcscpy(month, ConnectTwoString((LPWSTR)"0", GetLPWSTR(sTime.wMonth), true));
+	}
+	else
+	{
+		wcscpy(month, GetLPWSTR(sTime.wMonth));
+	}
 	auto* day = new TCHAR[2];
-	wcscpy(day, GetLPWSTR(sTime.wDay));
+	if (sTime.wDay < 10)
+	{
+		wcscpy(day, ConnectTwoString((LPWSTR)"0", GetLPWSTR(sTime.wDay), true));
+	}
+	else
+	{
+		wcscpy(day, GetLPWSTR(sTime.wDay));
+	}
 	auto* hour = new TCHAR[2];
-	wcscpy(hour, GetLPWSTR(sTime.wHour));
+	if (sTime.wHour < 10)
+	{
+		wcscpy(hour, ConnectTwoString((LPWSTR)"0", GetLPWSTR(sTime.wHour), true));
+	}
+	else
+	{
+		wcscpy(hour, GetLPWSTR(sTime.wHour));
+	}
 	auto* minute = new TCHAR[2];
-	wcscpy(minute, GetLPWSTR(sTime.wMinute));
+	if (sTime.wMinute < 10)
+	{
+		wcscpy(minute, ConnectTwoString((LPWSTR)"0", GetLPWSTR(sTime.wMinute), true));
+	}
+	else
+	{
+		wcscpy(minute, GetLPWSTR(sTime.wMinute));
+	}
 
 	int length = lstrlen(day) + lstrlen(month) + lstrlen(year) + lstrlen(hour)
 		+ lstrlen(minute) + 2 * lstrlen(TEXT("-")) + lstrlen(TEXT(" ")) + lstrlen(TEXT(":"));
 
 	auto* out = new TCHAR[length];
 	wcscpy(out, day);
-	wcscat(out, TEXT("-"));
+	wcscat(out, TEXT("."));
 	wcscat(out, month);
-	wcscat(out, TEXT("-"));
+	wcscat(out, TEXT("."));
 	wcscat(out, year);
 	wcscat(out, TEXT(" "));
 	wcscat(out, hour);

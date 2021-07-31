@@ -79,12 +79,12 @@ void WorkPane::ListViewInitialize()
 	lvc.iOrder = 0;
 	ListView_InsertColumn(hListView, 0, &lvc);
 
-	lvc.cx = 134;
+	lvc.cx = 164;
 	lvc.pszText = (LPWSTR)L"Size";
 	lvc.iSubItem = 1;
 	ListView_InsertColumn(hListView, 1, &lvc);
 
-	lvc.cx = 130;
+	lvc.cx = 100;
 	lvc.pszText = (LPWSTR)L"Date";
 	lvc.iSubItem = 2;
 	ListView_InsertColumn(hListView, 2, &lvc);
