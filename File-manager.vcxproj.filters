@@ -66,31 +66,31 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Icons\HDD.ico">
+    <Image Include="Icons\audio.bmp">
       <Filter>Файлы ресурсов</Filter>
     </Image>
-    <Image Include="Bitmap\Folder.bmp">
+    <Image Include="Icons\document.bmp">
       <Filter>Файлы ресурсов</Filter>
     </Image>
-    <Image Include="Bitmap\File.bmp">
+    <Image Include="Icons\exe.bmp">
       <Filter>Файлы ресурсов</Filter>
     </Image>
-    <Image Include="Bitmap\Folder-Open.bmp">
+    <Image Include="Icons\file.bmp">
       <Filter>Файлы ресурсов</Filter>
     </Image>
-    <Image Include="Bitmap\Exe.bmp">
+    <Image Include="Icons\folder.bmp">
       <Filter>Файлы ресурсов</Filter>
     </Image>
-    <Image Include="Bitmap\Audio_File.bmp">
+    <Image Include="Icons\folder-open.bmp">
       <Filter>Файлы ресурсов</Filter>
     </Image>
-    <Image Include="Bitmap\Document.bmp">
+    <Image Include="Icons\image.bmp">
       <Filter>Файлы ресурсов</Filter>
     </Image>
-    <Image Include="Bitmap\Image_File.bmp">
+    <Image Include="Icons\logo.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
-    <Image Include="Bitmap\Video_File.bmp">
+    <Image Include="Icons\video.bmp">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>

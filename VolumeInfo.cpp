@@ -5,7 +5,7 @@ VolumeInfo::VolumeInfo()
 	memset(this->path, '\0', 256);
 	memset(this->label, '\0', 256);
 	this->isAvailable = FALSE;
-	this->allSpace = 0;
+	this->usedSpace = 0;
 	this->freeSpace = 0;
 	this->fullSpace = 0;
 
@@ -20,9 +20,9 @@ void VolumeInfo::Update(TCHAR* path)
 
 	isAvailable = TRUE;
 
-	GetDiskFreeSpaceEx(this->path, nullptr, (ULARGE_INTEGER*)&allSpace, (ULARGE_INTEGER*)&freeSpace);
+	GetDiskFreeSpaceEx(this->path, nullptr, (ULARGE_INTEGER*)&fullSpace, (ULARGE_INTEGER*)&freeSpace);
 
-	fullSpace = allSpace - freeSpace;
+	usedSpace = fullSpace - freeSpace;
 }
 
 UINT VolumeInfo::GetNumberOfVolumes(TCHAR drives[][4])

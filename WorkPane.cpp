@@ -7,6 +7,8 @@
 #include <Shlwapi.h>
 #include "Constants.hpp"
 
+const TCHAR* sizes[] = { L"bytes", L"KB", L"MB", L"GB", L"TB", L"PB", L"EB", L"ZB", L"EB" };
+
 BOOL WorkPane::Initialize(HWND hWnd, UINT uComboId, UINT uListId, UINT uTextId, BOOL isLeft)
 {
 	this->isLeft = isLeft;
@@ -24,7 +26,7 @@ BOOL WorkPane::Initialize(HWND hWnd, UINT uComboId, UINT uListId, UINT uTextId, 
 		MessageBox(nullptr, TEXT("Combobox creation falture"), TEXT("Error"), MB_OK | MB_ICONERROR);
 		return FALSE;
 	}
-	ComboBoxInit();
+	
 
 	if (!CreatePathLabel(hWnd, uTextId))
 	{
@@ -32,12 +34,21 @@ BOOL WorkPane::Initialize(HWND hWnd, UINT uComboId, UINT uListId, UINT uTextId, 
 		return FALSE;
 	}
 
+	if (!CreateSizeLabel(hWnd, uTextId))
+	{
+		MessageBox(nullptr, TEXT("Size label creation falture"), TEXT("Error"), MB_OK | MB_ICONERROR);
+		return FALSE;
+	}
+
 	ListViewInitialize();
+	ComboBoxInit();
+	UpdateSizes();
 
 	auto hNormalFont = (HFONT)GetStockObject(DEFAULT_GUI_FONT);
 	SendMessage(hListView, WM_SETFONT, (WPARAM)hNormalFont, 0);
 	SendMessage(hComboBox, WM_SETFONT, (WPARAM)hNormalFont, 0);
 	SendMessage(hLabel, WM_SETFONT, (WPARAM)hNormalFont, 0);
+	SendMessage(hSizeLabel, WM_SETFONT, (WPARAM)hNormalFont, 0);
 
 	return TRUE;
 }
@@ -91,12 +102,14 @@ void WorkPane::Resize(HWND hWnd, LPARAM lParam)
 	{
 		MoveWindow(hComboBox, 1, 0, 50, 20, TRUE);
 		MoveWindow(hLabel, 0, 20, Size.cx, 20, TRUE);
+		MoveWindow(hSizeLabel, 51, 00, Size.cx - 51, 20, TRUE);
 		MoveWindow(hListView, 0, 40, Size.cx, Size.cy - 45, TRUE);
 	}
 	else
 	{
 		MoveWindow(hComboBox, Size.cx + 1, 0, 50, 2, TRUE);
 		MoveWindow(hLabel, Size.cx, 20, Size.cx, 20, TRUE);
+		MoveWindow(hSizeLabel, Size.cx + 51, 0, Size.cx - 51, 20, TRUE);
 		MoveWindow(hListView, Size.cx, 40, Size.cx, Size.cy - 45, TRUE);
 	}
 }
@@ -174,7 +187,6 @@ void WorkPane::UpdateList(TCHAR* _path)
 	SetCurrentPath(path);
 	wcscat(path, TEXT("*.*"));
 
-
 	WIN32_FIND_DATA data;
 	HANDLE hFile = FindFirstFile(path, &data);
 
@@ -192,6 +204,8 @@ void WorkPane::UpdateList(TCHAR* _path)
 		UpdateList(oldPath);
 	}
 
+	UpdateSizes();
+
 	FindClose(hFile);
 }
 
@@ -200,7 +214,6 @@ void WorkPane::InsertItem(UINT uItem, WIN32_FIND_DATA data, HANDLE hFile)
 	LVITEM lvi;
 	lvi.mask = LVIF_TEXT | LVIF_IMAGE;
 
-	// Name column
 	lvi.pszText = data.cFileName;
 	lvi.iItem = uItem;
 	lvi.iSubItem = 0;
@@ -293,4 +306,34 @@ int WorkPane::GetIconIndex(WIN32_FIND_DATA data)
 		}
 	}
 	return 0;
+}
+
+BOOL WorkPane::CreateSizeLabel(HWND hWnd, UINT uId)
+{
+	hSizeLabel = CreateWindowEx(WS_EX_CLIENTEDGE, WC_EDIT, nullptr, WS_CHILD | WS_VISIBLE | WS_BORDER | WS_DISABLED | WS_EX_LEFT,
+		0, 0, 0, 0, hWnd, (HMENU)uId, nullptr, nullptr);
+
+	if (hSizeLabel == nullptr)
+		return FALSE;
+	else return TRUE;
+}
+
+void WorkPane::UpdateSizes()
+{	
+	volumeInfo.Update(this->GetCurrentPath());
+	TCHAR buf[512];
+	DWORDLONG freeS = volumeInfo.freeSpace, fullS = volumeInfo.fullSpace;
+	int i = 0, j = 0;
+	while (freeS / 1024 >= 1)
+	{
+		i++;
+		freeS /= 1024;
+	}
+	while (fullS / 1024 >= 1)
+	{
+		j++;
+		fullS /= 1024;
+	}
+	_stprintf(buf, TEXT("Free %I64u bytes [%I64u %s] of %I64u bytes [%I64u %s]"), volumeInfo.freeSpace, freeS, sizes[i], volumeInfo.fullSpace, fullS, sizes[j]);
+	Edit_SetText(hSizeLabel, buf);
 }

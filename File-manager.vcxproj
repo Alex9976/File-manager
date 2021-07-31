@@ -160,15 +160,15 @@
     <ResourceCompile Include="File-manager.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Bitmap\Audio_File.bmp" />
-    <Image Include="Bitmap\Document.bmp" />
-    <Image Include="Bitmap\Exe.bmp" />
-    <Image Include="Bitmap\File.bmp" />
-    <Image Include="Bitmap\Folder-Open.bmp" />
-    <Image Include="Bitmap\Folder.bmp" />
-    <Image Include="Bitmap\Image_File.bmp" />
-    <Image Include="Bitmap\Video_File.bmp" />
-    <Image Include="Icons\HDD.ico" />
+    <Image Include="Icons\audio.bmp" />
+    <Image Include="Icons\document.bmp" />
+    <Image Include="Icons\exe.bmp" />
+    <Image Include="Icons\file.bmp" />
+    <Image Include="Icons\folder-open.bmp" />
+    <Image Include="Icons\folder.bmp" />
+    <Image Include="Icons\image.bmp" />
+    <Image Include="Icons\logo.ico" />
+    <Image Include="Icons\video.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

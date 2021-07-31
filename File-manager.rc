@@ -61,19 +61,12 @@ IDI_LOGO                ICON                    "Icons\\logo.ico"
 //
 
 IDB_FOLDER              BITMAP                  "Icons\\folder.bmp"
-
 IDB_FILE                BITMAP                  "Icons\\file.bmp"
-
 IDB_FOLDER_OPEN         BITMAP                  "Icons\\folder-open.bmp"
-
 IDB_EXE                 BITMAP                  "Icons\\exe.bmp"
-
 IDB_AUDIO               BITMAP                  "Icons\\audio.bmp"
-
 IDB_DOCUMENT            BITMAP                  "Icons\\document.bmp"
-
 IDB_IMAGE               BITMAP                  "Icons\\image.bmp"
-
 IDB_VIDEO               BITMAP                  "Icons\\video.bmp"
 
 
@@ -149,19 +142,6 @@ END
 IDD_FILE_NEW_DIALOG AFX_DIALOG_LAYOUT
 BEGIN
     0
-END
-
-IDD_ABOUT_DIALOG AFX_DIALOG_LAYOUT
-BEGIN
-    0
-END
-
-IDD_END_DIALOG AFX_DIALOG_LAYOUT
-BEGIN
-    0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 100
 END
 
 

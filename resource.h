@@ -13,10 +13,8 @@
 #define IDB_VIDEO                       113
 #define IDR_MENU                        114
 #define IDD_FILE_NEW_DIALOG             117
-#define IDD_DIALOG1                     121
 #define IDR_ACCELERATOR1                125
 #define IDC_EDIT1                       1001
-#define IDC_ABOUT_STATIC                1003
 #define ID_LEFTCOMBOBOX                 2000
 #define ID_LEFTTEXT                     2001
 #define ID_LEFTLISTVIEW                 2002
@@ -32,10 +30,6 @@
 #define ID_EDIT_COPY                    40009
 #define ID_EDIT_PASTE                   40010
 #define ID_EDIT_DELETE                  40011
-#define ID_EDIT_                        40012
-#define ID_FILE_EXIT40013               40013
-#define ID_EDIT_FIND                    40014
-#define ID_HELP                         40015
 #define ID_HELP_ABOUT			        40016
 #define ID_PASTE                        40022
 #define ID_COPY                         40023

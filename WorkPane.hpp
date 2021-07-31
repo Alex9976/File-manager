@@ -13,12 +13,13 @@ private:
 	BOOL CreateComboBox(HWND hWnd, UINT uId);
 	void ComboBoxInit();
 	BOOL CreatePathLabel(HWND hWnd, UINT uId);
+	BOOL CreateSizeLabel(HWND hWnd, UINT uId);
 	TCHAR currentPath[256];
 	void CreateIconList();
 	int GetIconIndex(WIN32_FIND_DATA data);
 	void InsertItem(UINT uItem, WIN32_FIND_DATA data, HANDLE hFile);
 public: 
-	HWND hListView, hLabel, hComboBox;
+	HWND hListView, hLabel, hComboBox, hSizeLabel;
 	BOOL isSelected;
 	BOOL Initialize(HWND hWnd, UINT uComboId, UINT uListId, UINT uTextId, BOOL isLeft);
 	void Resize(HWND hWnd, LPARAM lParam);
@@ -27,5 +28,6 @@ public:
 	void SetCurrentPath(TCHAR* path);
 	WorkPane();
 	void UpdateList(TCHAR* path);
+	void UpdateSizes();
 };
 

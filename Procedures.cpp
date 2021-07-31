@@ -69,6 +69,8 @@ LRESULT CommandProcedure(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			GlobalFree(lpsString);
 		}
+		rightWorkPane.UpdateSizes();
+		leftWorkPane.UpdateSizes();
 		break;
 	case ID_RIGHTCOMBOBOX:
 		rightWorkPane.isSelected = TRUE;
@@ -87,6 +89,8 @@ LRESULT CommandProcedure(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			GlobalFree(lpsString);
 		}
+		rightWorkPane.UpdateSizes();
+		leftWorkPane.UpdateSizes();
 		break;
 	case ID_NEW:
 	case ID_FILE_NEW:
@@ -239,7 +243,7 @@ LRESULT Notify(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			ListView_GetItemPosition(rightWorkPane.hListView, lpnmItem->iItem, &pPoint);
 			ClientToScreen(rightWorkPane.hListView, &pPoint);
 
-			TrackPopupMenu( GetSubMenu(LoadMenu(NULL, MAKEINTRESOURCE(IDR_MENU)), 1), 0, pPoint.x + 50, pPoint.y, 0, hWnd, NULL);
+			TrackPopupMenu(GetSubMenu(LoadMenu(NULL, MAKEINTRESOURCE(IDR_MENU)), 1), 0, pPoint.x + 50, pPoint.y, 0, hWnd, NULL);
 
 			break;
 		case NM_CLICK:
@@ -276,6 +280,8 @@ LRESULT Notify(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			{
 				ShellExecute(nullptr, TEXT("open"), tBuffer1, nullptr, nullptr, SW_SHOWNORMAL);
 			}
+			rightWorkPane.UpdateSizes();
+			leftWorkPane.UpdateSizes();
 			break;
 		default:
 			return DefWindowProc(hWnd, uMsg, wParam, lParam);
