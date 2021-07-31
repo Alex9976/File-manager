@@ -130,22 +130,28 @@ LRESULT CommandProcedure(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	case ID_DEL:
 	case ID_EDIT_DELETE:
-		//TODO: Add MessageBox
-
 		SendMessage(hWnd, WM_COMMAND, ID_EDIT_COPY, NULL);
 		if (tCopyBuffer)
 		{
 			for (int i = 0; i < countCopyBuffer; i++)
 			{
-				if (PathIsDirectory(tCopyBuffer[i]))
-				{
-					if (!PathIsDirectoryEmpty(tCopyBuffer[i]))
-					{
-						MessageBox(nullptr, TEXT("Directory is not empty! Remove content!"), TEXT("Warning"), MB_OK | MB_ICONWARNING);
-					}
-					RemoveDirectory(tCopyBuffer[i]);
-				}
-				else DeleteFile(tCopyBuffer[i]);
+				SHFILEOPSTRUCT shfo = {NULL, FO_DELETE, tCopyBuffer[i], NULL, FOF_ALLOWUNDO | FOF_NOCONFIRMATION, FALSE, NULL, NULL };
+
+				SHFileOperation(&shfo);
+
+				//Uncomment to remove files permanently
+				//if (PathIsDirectory(tCopyBuffer[i]))
+				//{
+				//	if (!PathIsDirectoryEmpty(tCopyBuffer[i]))
+				//	{
+				//		MessageBox(nullptr, TEXT("Directory is not empty! Remove content!"), TEXT("Warning"), MB_OK | MB_ICONWARNING);
+				//	}
+				//	RemoveDirectory(tCopyBuffer[i]);
+				//}
+				//else
+				//{
+				//	DeleteFile(tCopyBuffer[i]);
+				//}
 
 				leftWorkPane.UpdateList(leftWorkPane.GetCurrentPath());
 				rightWorkPane.UpdateList(rightWorkPane.GetCurrentPath());
