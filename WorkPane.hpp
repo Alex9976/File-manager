@@ -18,6 +18,7 @@ private:
 	void CreateIconList();
 	int GetIconIndex(WIN32_FIND_DATA data);
 	void InsertItem(UINT uItem, WIN32_FIND_DATA data, HANDLE hFile);
+	void ListViewUpdateColumnSize(SIZE size);
 public: 
 	HWND hListView, hLabel, hComboBox, hSizeLabel, hRefreshButton;
 	BOOL isSelected;

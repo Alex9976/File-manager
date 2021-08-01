@@ -79,18 +79,48 @@ void WorkPane::ListViewInitialize()
 	lvc.iOrder = 0;
 	ListView_InsertColumn(hListView, 0, &lvc);
 
-	lvc.cx = 164;
+	lvc.cx = 144;
 	lvc.pszText = (LPWSTR)L"Size";
 	lvc.iSubItem = 1;
 	ListView_InsertColumn(hListView, 1, &lvc);
 
-	lvc.cx = 100;
+	lvc.cx = 120;
 	lvc.pszText = (LPWSTR)L"Date";
 	lvc.iSubItem = 2;
 	ListView_InsertColumn(hListView, 2, &lvc);
 
 	UpdateList(volumeInfo.path);
-	SetCurrentPath(volumeInfo.path);
+	SetCurrentPath(volumeInfo.path);	
+}
+
+//TODO: Remove this shit
+void WorkPane::ListViewUpdateColumnSize(SIZE size)
+{
+	ListView_DeleteColumn(hListView, 2);
+	ListView_DeleteColumn(hListView, 1);
+	ListView_DeleteColumn(hListView, 0);
+
+	LVCOLUMN lvc;
+	lvc.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
+
+	lvc.fmt = LVCFMT_LEFT;
+	lvc.cx = size.cx * 25 / 47;
+	lvc.pszText = (LPWSTR)L"Name";
+	lvc.iSubItem = 0;
+	lvc.iOrder = 0;
+	ListView_InsertColumn(hListView, 0, &lvc);
+
+	lvc.cx = size.cx * 12 / 47;
+	lvc.pszText = (LPWSTR)L"Size";
+	lvc.iSubItem = 1;
+	ListView_InsertColumn(hListView, 1, &lvc);
+
+	lvc.cx = size.cx * 10 / 47 - 3;
+	lvc.pszText = (LPWSTR)L"Date";
+	lvc.iSubItem = 2;
+	ListView_InsertColumn(hListView, 2, &lvc);
+
+	UpdateList(volumeInfo.path);
 }
 
 void WorkPane::Resize(HWND hWnd, LPARAM lParam)
@@ -98,6 +128,7 @@ void WorkPane::Resize(HWND hWnd, LPARAM lParam)
 	SIZE Size;
 	Size.cx = LOWORD(lParam) / 2;
 	Size.cy = HIWORD(lParam);
+	ListViewUpdateColumnSize(Size);
 	if (isLeft)
 	{
 		MoveWindow(hComboBox, 1, 0, 50, 20, TRUE);
