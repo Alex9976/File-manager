@@ -1,5 +1,5 @@
 #include "WorkWindow.hpp"
-#include "MainWindow.hpp"
+#include "WinMain.hpp"
 #include "Procedures.hpp"
 #include "resource.h"
 

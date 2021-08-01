@@ -1,4 +1,4 @@
-#include "MainWindow.hpp"
+#include "WinMain.hpp"
 #include "WorkWindow.hpp"
 #include "resource.h"
 

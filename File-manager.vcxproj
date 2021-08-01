@@ -140,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Convert.cpp" />
-    <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="Procedures.cpp" />
     <ClCompile Include="VolumeInfo.cpp" />
     <ClCompile Include="WorkPane.cpp" />
@@ -149,7 +149,7 @@
   <ItemGroup>
     <ClInclude Include="Constants.hpp" />
     <ClInclude Include="Convert.hpp" />
-    <ClInclude Include="MainWindow.hpp" />
+    <ClInclude Include="WinMain.hpp" />
     <ClInclude Include="Procedures.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="VolumeInfo.hpp" />

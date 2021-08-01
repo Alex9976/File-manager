@@ -93,7 +93,6 @@ void WorkPane::ListViewInitialize()
 	SetCurrentPath(volumeInfo.path);	
 }
 
-//TODO: Remove this shit
 void WorkPane::ListViewUpdateColumnSize(SIZE size)
 {
 	ListView_DeleteColumn(hListView, 2);
