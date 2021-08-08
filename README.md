@@ -1,2 +1,2 @@
-# File-manager
- Simple dual pane file manager
+# File Manager
+ Simple dual pane file manager on WinAPI
