@@ -28,6 +28,9 @@ BOOL WorkWindow::Initialize(HINSTANCE hInstance)
 	if (hWnd == NULL) 
 		return FALSE;
 
+	int nTimerID;
+	nTimerID = SetTimer(hWnd, TIMER_ID, 2000, NULL);
+
 	ShowWindow(hWnd, SW_SHOWNORMAL);
 	UpdateWindow(hWnd);
 
@@ -43,5 +46,8 @@ WPARAM WorkWindow::MessageLoop(HACCEL hAccel)
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
+
+	KillTimer(hWnd, TIMER_ID);
+
 	return msg.wParam;
 }

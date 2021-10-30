@@ -202,7 +202,7 @@ WorkPane::WorkPane()
 	memset(currentPath, '\0', 256);
 }
 
-void WorkPane::UpdateList(TCHAR* _path)
+void WorkPane::UpdateList(TCHAR* _path, BOOL isTimerRefresh)
 {
 	auto* oldPath = new TCHAR[256];
 	memset(oldPath, '\0', 256);

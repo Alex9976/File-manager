@@ -28,7 +28,7 @@ public:
 	LPWSTR GetCurrentPath();
 	void SetCurrentPath(TCHAR* path);
 	WorkPane();
-	void UpdateList(TCHAR* path);
+	void UpdateList(TCHAR* _path, BOOL isTimerRefresh = false);
 	void UpdateSizes();
 };
 

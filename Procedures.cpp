@@ -20,6 +20,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
+	case WM_TIMER:
+		leftWorkPane.UpdateList(leftWorkPane.GetCurrentPath(), true);
+		rightWorkPane.UpdateList(rightWorkPane.GetCurrentPath(), true);
+		rightWorkPane.UpdateSizes();
+		leftWorkPane.UpdateSizes();
+		break;
 	case WM_CREATE:
 		if (!leftWorkPane.Initialize(hWnd, ID_LEFTCOMBOBOX, ID_LEFTLISTVIEW, ID_LEFTTEXT, TRUE))
 		{
@@ -52,6 +58,7 @@ LRESULT CommandProcedure(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (LOWORD(wParam))
 	{
+
 	case ID_EDIT_REFRESH:
 	case ID_REFRESH:
 		leftWorkPane.UpdateList(leftWorkPane.GetCurrentPath());
