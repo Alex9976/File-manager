@@ -197,7 +197,7 @@ LPWSTR WorkPane::GetCurrentPath()
 	return currentPath;
 }
 
-WorkPane::WorkPane()
+WorkPane::WorkPane() : listViewItemsCount(0), cycleCount(0)
 {
 	memset(currentPath, '\0', 256);
 }
@@ -207,6 +207,38 @@ void WorkPane::UpdateList(TCHAR* _path, BOOL isTimerRefresh)
 	auto* oldPath = new TCHAR[256];
 	memset(oldPath, '\0', 256);
 	wcscpy(oldPath, currentPath);
+
+	if (isTimerRefresh)
+	{
+		int length = lstrlen(_path) + lstrlen(TEXT("*.*"));
+		auto* path = new TCHAR[length];
+		wcscpy(path, _path);
+		wcscat(path, TEXT("*.*"));
+
+		WIN32_FIND_DATA data;
+		HANDLE hFile = FindFirstFile(path, &data);
+
+		int i = 0;
+		while (FindNextFile(hFile, &data))
+		{
+			i++;
+		}
+
+		++this->cycleCount;
+
+		if (this->cycleCount <= MAX_CYCLE_COUNT)
+		{
+			if (this->listViewItemsCount == i)
+				return;
+		}
+		else
+		{
+			this->cycleCount = 0;
+		}
+		
+	}
+
+	this->listViewItemsCount = 0;
 
 	ListView_DeleteAllItems(hListView);
 
@@ -228,6 +260,8 @@ void WorkPane::UpdateList(TCHAR* _path, BOOL isTimerRefresh)
 		InsertItem(i, data, hFile);
 		i++;
 	}
+
+	this->listViewItemsCount = i;
 
 	if (i == 0 && (MessageBox(nullptr, TEXT("Access denied"), TEXT("Error"), MB_OK | MB_ICONERROR) == IDOK))
 	{

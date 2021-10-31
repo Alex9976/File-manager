@@ -2,6 +2,7 @@
 #include <Windows.h>
 
 #define TIMER_ID 666
+#define TIMER_DELAY 200
 
 class WorkWindow
 {

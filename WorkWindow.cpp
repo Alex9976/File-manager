@@ -29,7 +29,7 @@ BOOL WorkWindow::Initialize(HINSTANCE hInstance)
 		return FALSE;
 
 	int nTimerID;
-	nTimerID = SetTimer(hWnd, TIMER_ID, 2000, NULL);
+	nTimerID = SetTimer(hWnd, TIMER_ID, TIMER_DELAY, NULL);
 
 	ShowWindow(hWnd, SW_SHOWNORMAL);
 	UpdateWindow(hWnd);

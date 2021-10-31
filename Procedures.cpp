@@ -23,8 +23,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_TIMER:
 		leftWorkPane.UpdateList(leftWorkPane.GetCurrentPath(), true);
 		rightWorkPane.UpdateList(rightWorkPane.GetCurrentPath(), true);
-		rightWorkPane.UpdateSizes();
-		leftWorkPane.UpdateSizes();
+		/*rightWorkPane.UpdateSizes();
+		leftWorkPane.UpdateSizes();*/
 		break;
 	case WM_CREATE:
 		if (!leftWorkPane.Initialize(hWnd, ID_LEFTCOMBOBOX, ID_LEFTLISTVIEW, ID_LEFTTEXT, TRUE))
